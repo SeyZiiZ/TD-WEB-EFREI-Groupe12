@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundWeb</title>
+  <meta name="description" content="SoundWeb" />
+  <link
+  rel="shortcut icon"
+  href="./src/assets/images/logo.png"
+  type="image/x-icon"
+  />
+
+  <link href="./dist/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/styles.css">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+    integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" 
+  />
+
+</head>
+
+<body class="tw-flex tw-min-h-[100vh] tw-flex-col tw-bg-[#fff]">
+    <header
+        class="tw-absolute tw-top-0 tw-z-20 tw-flex tw-h-[60px] tw-w-full tw-bg-opacity-0 tw-px-[5%] max-lg:tw-mr-auto max-lg:tw-px-4 lg:tw-justify-around"
+    >
+        <a class="tw-h-[50px] tw-w-[50px] tw-p-[4px]" href="">
+            <img
+                src="./src/assets/images/logo.png"
+                alt="logo"
+                class="tw-object tw-h-full tw-w-full"
+            />
+        </a>
+        <div
+            class="collapsible-header animated-collapse max-lg:tw-shadow-md"
+            id="collapsed-header-items"
+        >
+            <div
+                class="tw-flex tw-h-full tw-w-max tw-gap-5 tw-text-base tw-text-black max-lg:tw-mt-[30px] max-lg:tw-flex-col max-lg:tw-place-items-end max-lg:tw-gap-5 lg:tw-mx-auto lg:tw-place-items-center"
+            >
+                <a class="header-links" href=""> A propos </a>
+                <a class="header-links" href="#pricing"> Prix </a>
+                <a class="header-links" href="#features"> Fonctionnalités </a>
+                <a class="header-links" href=""> Contactez-Nous </a>
+            </div>
+            <div
+                class="tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full max-md:tw-flex-col max-md:tw-place-content-center"
+            >
+                <a
+                    href="./src/pages/connexion.html"
+                    aria-label="signup"
+                    class="tw-rounded-md tw-bg-primary tw-px-3 tw-py-2 tw-text-white tw-transition-transform tw-duration-[0.3s] hover:tw-translate-x-2"
+                >
+                    <span>Connexion</span>
+                    <i class="bi bi-person-fill"></i>
+                </a>
+            </div>
+        </div>
+        <button
+            class="bi bi-list tw-absolute tw-right-3 tw-top-3 tw-z-50 tw-text-3xl tw-text-black lg:tw-hidden"
+            onclick="toggleHeader()"
+            aria-label="menu"
+            id="collapse-btn"
+        ></button>
+    </header>
+
+    <section
+        class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden max-lg:tw-p-4 max-md:tw-mt-[50px]"
+    >
+        <div
+            class="tw-flex tw-h-full tw-min-h-[100vh] tw-w-full tw-place-content-center tw-gap-6 tw-p-[5%] max-xl:tw-place-items-center max-lg:tw-flex-col"
+        >
+            <div class="tw-flex tw-flex-col tw-place-content-center">
+                <div
+                    class="tw-text-6xl tw-font-semibold tw-uppercase tw-leading-[80px] max-lg:tw-text-4xl max-md:tw-leading-snug"
+                >
+                    <span> Ecoutez instantanément </span>
+                    <br />
+                    <span class="tw-text-primary"> Les meilleurs morceaux </span>
+                </div>
+                <div
+                    class="tw-mt-10 tw-max-w-[450px] tw-p-2 tw-text-justify max-lg:tw-max-w-full"
+                >
+                Écoutez instantanément des centaines de morceaux en libre accès de créateurs de renom et de créateurs indépendants. 
+                Que vous soyez fan de musique classique, de rock, de jazz ou de tout autre genre, 
+                notre plateforme vous offre une expérience musicale riche et diversifiée.
+                </div>
+
+                <div
+                    class="tw-mt-4 tw-flex tw-place-items-center tw-gap-4 tw-overflow-hidden tw-p-2"
+                >
+                    <a
+                        class="btn tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.03]"
+                        href=""
+                    >
+                        Commencer
+                    </a>
+                    <a
+                        class="btn !tw-bg-[#c8cbf984] !tw-text-primary tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.03]"
+                        href=""
+                    >
+                        <span>En savoir plus</span>
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="tw-flex tw-w-full tw-max-w-[50%] tw-place-content-center tw-place-items-center tw-overflow-hidden max-lg:tw-max-w-[unset]"
+            >
+                <div
+                    class="tw-flex tw-max-h-[580px] tw-min-h-[450px] tw-min-w-[350px] tw-max-w-[650px] tw-overflow-hidden max-lg:tw-h-fit max-lg:tw-max-h-[320px] max-lg:tw-min-h-[180px] max-lg:tw-w-[320px] max-lg:tw-min-w-[320px]"
+                >
+                    <img
+                        src="./src/assets/images/home/Music-amico.png"
+                        alt="app"
+                        class="tw-h-full tw-w-full tw-object-contain"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section
+        class="tw-relative tw-flex tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden tw-p-6"
+        id="numbers"
+    >
+        <div class="tw-flex tw-flex-col tw-place-items-center tw-gap-8">
+            <h3 class="tw-text-3xl">Quelques Chiffres</h3>
+            <div
+                class="tw-flex tw-w-full tw-place-content-center tw-gap-10 max-md:tw-flex-col"
+                id="numbers-container"
+            >
+                <div>
+                    <span class="tw-text-6xl max-lg:tw-text-4xl">
+                        <span id="installs">25</span><span>k +</span>
+                    </span>
+                    <span
+                        class="tw-text-xl tw-font-medium tw-text-gray-800"
+                    >
+                        /Utilisateurs
+                    </span>
+                </div>
+                <div class="tw-text-6xl">
+                    <span class="tw-text-6xl max-lg:tw-text-4xl">
+                        <span id="hours">400</span>
+                        <span>+</span>
+                    </span>
+                    <span
+                        class="tw-text-xl tw-font-medium tw-text-gray-800"
+                    >
+                        /hrs d'écoutes
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section
+        class="tw-relative tw-flex tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden tw-p-6"
+        id="features"
+    >
+        <div
+            class="tw-mt-8 tw-flex tw-flex-col tw-place-items-center tw-gap-5"
+        >
+            <div
+                class="tw-mt-5 tw-flex tw-flex-col tw-gap-3 tw-text-center"
+            >
+                <h3 class="tw-text-xl tw-text-primary">
+                  Fonctionnalités appréciées par nos clients
+                </h3>
+                <h2 class="tw-text-4xl tw-font-semibold">Fonctionnalités</h2>
+            </div>
+            <div
+                class="tw-mt-6 tw-flex tw-max-w-[60%] tw-flex-wrap tw-place-content-center tw-gap-2 max-lg:tw-flex-col"
+            >
+                <div
+                    class="tw-flex tw-h-[250px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4 tw-text-center"
+                >
+                    <!-- <img src="./assets/images/home/sample.jpg" 
+                            alt="feature1"> -->
+                    <i
+                        class="bi bi-boombox-fill tw-text-5xl tw-text-primary"
+                    ></i>
+                    <h3 class="tw-text-2xl tw-font-semibold">Qualité Audio Exceptionnelle</h3>
+                    <div class="tw-text-[#595959]">
+                      Profitez d'une qualité audio exceptionnelle grâce à notre technologie de pointe. 
+                      Chaque morceau est encodé en haute résolution pour vous offrir une expérience d'écoute immersive. 
+                    </div>
+                </div>
+                <div
+                    class="tw-flex tw-h-[250px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4 tw-text-center"
+                >
+                    <!-- <img src="./assets/images/home/sample.jpg" 
+                            alt="feature1"> -->
+                    <i
+                        class="bi bi-award-fill tw-text-5xl tw-text-primary"
+                    ></i>
+                    <h3 class="tw-text-2xl tw-font-semibold">Application Récompensée</h3>
+                    <div class="tw-text-[#595959]">
+                      Notre application a été récompensée à plusieurs reprises pour sa qualité sonore exceptionnelle. 
+                      Grâce à notre technologie audio avancée, chaque morceau est restitué avec une clarté et une précision inégalées.
+                    </div>
+                </div>
+                <div
+                    class="tw-flex tw-h-[250px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4 tw-text-center"
+                >
+                    <!-- <img src="./assets/images/home/sample.jpg" 
+                            alt="feature1"> -->
+                    <i
+                        class="bi bi-book-fill tw-text-5xl tw-text-primary"
+                    ></i>
+                    <h3 class="tw-text-2xl tw-font-semibold">Un Catalogue Riche</h3>
+                    <div class="tw-text-[#595959]">
+                      Explorez un catalogue riche et diversifié qui répond à tous vos goûts musicaux. 
+                      Avec des millions de titres disponibles, notre plateforme vous offre un accès illimité à une vaste collection de genres musicaux.
+                    </div>
+                </div>
+                <div
+                    class="tw-flex tw-h-[250px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4 tw-text-center"
+                >
+                    <!-- <img src="./assets/images/home/sample.jpg" 
+                        alt="feature1"> -->
+                    <i class="bi bi-fire tw-text-5xl tw-text-primary"></i>
+                    <h3 class="tw-text-2xl tw-font-semibold">Toujours En Tendance</h3>
+                    <div class="tw-text-[#595959]">
+                      Nous suivons de près les dernières sorties, 
+                      Grâce à notre catalogue mises à jour régulièrement, nos recommandations personnalisées et nos exclusivités, 
+                      vous ne manquerez jamais les morceaux qui font le buzz.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section
+        class="tw-mt-5 tw-flex tw-w-full tw-flex-col tw-place-items-center tw-p-[2%]"
+    >
+        <h3
+            class="tw-text-3xl tw-font-medium tw-text-primary max-md:tw-text-2xl"
+        >
+          Ce que disent nos clients
+        </h3>
+        <!-- Testimonials -->
+        <div
+            class="tw-mt-8 tw-gap-10 tw-space-y-8 max-md:tw-columns-1 lg:tw-columns-2 xl:tw-columns-3"
+        >
+            <div
+                class="tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid tw-flex-col tw-rounded-lg tw-p-4 tw-shadow-lg max-lg:tw-w-[320px]"
+            >
+                <div class="tw-flex tw-place-items-center tw-gap-3">
+                    <div
+                        class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full tw-border-[2px] tw-border-solid tw-border-primary"
+                    >
+                        <img
+                            src="./src/assets/images/people/women.jpg"
+                            class="tw-h-full tw-w-full tw-object-cover"
+                            alt="women"
+                        />
+                    </div>
+                    <div class="tw-flex tw-flex-col tw-gap-1">
+                        <div class="tw-font-semibold">Trich B</div>
+                    </div>
+                </div>
+                <p class="tw-mt-4 tw-italic tw-text-gray-600">
+                  Cette application est tout simplement incroyable ! 
+                  La qualité audio est exceptionnelle et le catalogue est si riche que je découvre de nouveaux morceaux tous les jours. 
+                  Je recommande vivement cette plateforme à tous les amateurs de musique !
+                </p>
+            </div>
+            <div
+                class="tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid tw-flex-col tw-rounded-lg tw-p-4 tw-shadow-lg max-lg:tw-w-[320px]"
+            >
+                <div class="tw-flex tw-place-items-center tw-gap-3">
+                    <div
+                        class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full tw-border-[2px] tw-border-solid tw-border-primary"
+                    >
+                        <img
+                            src="./src/assets/images/people/man.jpg"
+                            class="tw-h-full tw-w-full tw-object-cover"
+                            alt="man"
+                        />
+                    </div>
+                    <div class="tw-flex tw-flex-col tw-gap-1">
+                        <div class="tw-font-semibold">John B</div>
+                    </div>
+                </div>
+                <p class="tw-mt-4 tw-italic tw-text-gray-600">
+                  Je suis absolument ravi de cette application ! 
+                  La qualité sonore est impeccable et le catalogue est tellement varié que je trouve toujours quelque chose de nouveau à écouter.
+                </p>
+            </div>
+            <div
+                class="tw-flex tw-h-fit tw-w-[350px] tw-break-inside-avoid tw-flex-col tw-rounded-lg tw-p-4 tw-shadow-lg max-lg:tw-w-[320px]"
+            >
+                <div class="tw-flex tw-place-items-center tw-gap-3">
+                    <div
+                        class="tw-h-[50px] tw-w-[50px] tw-overflow-hidden tw-rounded-full tw-border-[2px] tw-border-solid tw-border-primary"
+                    >
+                        <img
+                            src="./src//assets/images/people/man2.jpg"
+                            class="tw-h-full tw-w-full tw-object-cover"
+                            alt="man"
+                        />
+                    </div>
+                    <div class="tw-flex tw-flex-col tw-gap-1">
+                        <div class="tw-font-semibold">Mante</div>
+                    </div>
+                </div>
+                <p class="tw-mt-4 tw-italic tw-text-gray-600">
+                  L'interface de cette application est tout simplement révolutionnaire ! 
+                  Elle est intuitive, fluide et incroyablement facile à utiliser. 
+                  La navigation est un jeu d'enfant, et les fonctionnalités sont parfaitement intégrées.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section
+        class="tw-mt-5 tw-flex tw-w-full tw-flex-col tw-place-items-center tw-p-[2%]"
+        id="pricing"
+    >
+        <h3
+            class="tw-text-3xl tw-font-medium tw-text-primary max-md:tw-text-2xl"
+        >
+            Nos tarifs
+        </h3>
+        <!-- pricing -->
+        <div
+            class="tw-mt-10 tw-flex tw-flex-wrap tw-place-content-center tw-gap-8 max-lg:tw-flex-col"
+        >
+            <div
+                class="tw-flex tw-w-[380px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-p-8 tw-shadow-xl max-lg:tw-w-[320px]"
+            >
+                <h3 class="">
+                    <span class="tw-text-5xl tw-font-semibold">Gratuit</span>
+                    <span class="tw-text-2xl tw-text-gray-600"></span>
+                </h3>
+                <p class="tw-mt-3 tw-text-center tw-text-gray-600">
+                  Une offre pour bien débuter et profiter gratuitement
+                </p>
+                <hr />
+                <ul
+                    class="tw-mt-4 tw-flex tw-flex-col tw-gap-2 tw-text-center tw-text-lg tw-text-gray-600"
+                >
+                    <li>Découvrez notre offre gratuite.</li>
+                    <li>Essayez sans engagement.</li>
+                    <li>Accédez à des millions de titres.</li>
+                    <li>Profitez d'une qualité audio supérieure.</li>
+                </ul>
+                <a
+                    href="http://"
+                    class="btn tw-mt-8 !tw-w-full tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.02]"
+                >
+                    Get now
+                </a>
+            </div>
+            <div
+                class="tw-flex tw-w-[380px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-border-2 tw-border-primary tw-p-8 tw-shadow-xl max-lg:tw-w-[320px]"
+            >
+                <h3 class="">
+                    <span class="tw-text-5xl tw-font-semibold">9€</span>
+                    <span class="tw-text-2xl tw-text-gray-600">/mois</span>
+                </h3>
+                <p class="tw-mt-3 tw-text-center tw-text-gray-600">
+                  Profitez d'une expérience musicale exceptionnelle avec notre abonnement premium à petit prix.
+                </p>
+                <hr />
+                <ul
+                    class="tw-mt-4 tw-flex tw-flex-col tw-gap-2 tw-text-center tw-text-lg tw-text-gray-600"
+                >
+                <li>Accédez à des millions de titres.</li>
+                <li>Sans publicité.</li>
+                <li>Qualité audio supérieure.</li>
+                <li>Téléchargez pour écouter hors ligne.</li>
+                </ul>
+                <a
+                    href="http://"
+                    class="btn tw-mt-8 !tw-w-full tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.02]"
+                >
+                    Get now
+                </a>
+            </div>
+            <div
+                class="tw-flex tw-w-[380px] tw-flex-col tw-place-items-center tw-gap-2 tw-rounded-lg tw-p-8 tw-shadow-xl max-lg:tw-w-[320px]"
+            >
+                <h3 class="">
+                    <span class="tw-text-5xl tw-font-semibold">19€</span>
+                    <span class="tw-text-2xl tw-text-gray-600">/mois</span>
+                </h3>
+                <p class="tw-mt-3 tw-text-center tw-text-gray-600">
+                  Profitez d'une expérience musicale sans limites avec notre abonnement premium !
+                </p>
+                <hr />
+                <ul
+                    class="tw-mt-4 tw-flex tw-flex-col tw-gap-2 tw-text-center tw-text-lg tw-text-gray-600"
+                >
+                    <li>Accédez à des millions de titres.</li>
+                    <li>Sans publicité.</li>
+                    <li>Qualité audio supérieure.</li>
+                    <li>Téléchargez pour écouter hors ligne.</li>
+                </ul>
+                <a
+                    href="http://"
+                    class="btn tw-mt-8 !tw-w-full tw-transition-transform tw-duration-[0.3s] hover:tw-scale-x-[1.02]"
+                >
+                    Get now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section
+        class="tw-flex tw-w-full tw-flex-col tw-place-content-center tw-place-items-center tw-gap-[10%] tw-p-[5%] tw-px-[10%]"
+    >
+        <div
+            class="tw-flex tw-w-full tw-flex-col tw-place-content-center tw-place-items-center tw-gap-3"
+        >
+            <h2 class="tw-text-2xl tw-text-primary max-md:tw-text-xl">
+                Inscription a notre newsletter
+            </h2>
+            <h2 class="tw-text-xl max-md:tw-text-lg">
+                Se tenir au courant
+            </h2>
+
+            <div
+                class="tw-flex tw-h-[60px] tw-place-items-center tw-gap-2 tw-overflow-hidden tw-p-2"
+            >
+                <input
+                    type="email"
+                    class="input tw-h-full tw-w-full tw-p-2 tw-outline-none"
+                    placeholder="email"
+                />
+                <a
+                    class="btn tw-transition-colors tw-duration-[0.3s]"
+                    href=""
+                >
+                  S'inscrire
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        class="tw-mt-auto tw-flex tw-w-full tw-place-content-around tw-gap-3 tw-p-[5%] tw-px-[10%] tw-text-black max-md:tw-flex-col"
+    >
+        <div
+            class="tw-flex tw-h-full tw-w-[250px] tw-flex-col tw-place-items-center tw-gap-6 max-md:tw-w-full"
+        >
+            <img
+                src="./src/assets/images/logo.png"
+                alt="logo"
+                srcset=""
+                class="tw-max-w-[120px]"
+            />
+            <div>
+                Avenue des champs élysées,
+                <br />
+                Batiment 20, P 2,
+                <br />
+                France
+            </div>
+            <div class="tw-mt-3 tw-text-lg tw-font-semibold">Suivez Nous</div>
+            <div class="tw-flex tw-gap-4 tw-text-2xl">
+                <a href="" aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a
+                    href="https://twitter.com/@pauls_freeman"
+                    aria-label="Twitter"
+                >
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a
+                    href="https://instagram.com/"
+                    class="tw-h-[40px] tw-w-[40px]"
+                    aria-label="Instagram"
+                >
+                    <i class="bi bi-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="tw-flex tw-h-full tw-w-[250px] tw-flex-col tw-gap-4">
+            <h2 class="tw-text-3xl max-md:tw-text-xl">Resources</h2>
+            <div class="tw-flex tw-flex-col tw-gap-3 max-md:tw-text-sm">
+                <a href="#" class="footer-link">A props</a>
+                <a href="#" class="footer-link">FAQ</a>
+                <a href="#" class="footer-link">Contactez-Nous</a>
+                <a href="#" class="footer-link">Blogs</a>
+                <a href="#" class="footer-link">Privacy policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"
+    integrity="sha512-B1lby8cGcAUU3GR+Fd809/ZxgHbfwJMp0jLTVfHiArTuUt++VqSlJpaJvhNtRf3NERaxDNmmxkdx2o+aHd4bvw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/ScrollTrigger.min.js"
+    integrity="sha512-AY2+JxnBETJ0wcXnLPCcZJIJx0eimyhz3OJ55k2Jx4RtYC+XdIi2VtJQ+tP3BaTst4otlGG1TtPJ9fKrAUnRdQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+
+<script src="./index.js"></script>
+</body>
+</html>

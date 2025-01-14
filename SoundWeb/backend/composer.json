@@ -1,0 +1,24 @@
+{
+    "name": "pc/backend",
+    "description": "SoundWeb app",
+    "version": "1.0.0",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "App\\Controller\\": "src/Controller",
+            "App\\Model\\": "src/Model"
+        }
+    },
+    "authors": [
+        {
+            "name": "Seyy",
+            "email": "aitbihiyanis@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "firebase/php-jwt": "^6.10"
+    }
+}
