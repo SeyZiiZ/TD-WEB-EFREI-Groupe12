@@ -1,19 +1,17 @@
-import axios from '../node_modules/axios/dist/esm/axios.js';
-// mport axios from "../node_modules/axios/dist/esm/axios.min.js";
+import axios from '../../node_modules/axios/dist/esm/axios.js';
+import { BASE_URL_API } from '../../config.js';
 
 class ApiService {
+
     static async loginUser(email, password) {
-        return await axios.post("http://localhost:8000/api/users/login", { email, password });
+        return await axios.post(`${BASE_URL_API}/api/login`, { email, password });
     }
 
-    static async registerUser(name, email, password) {
-        return await axios.post("http://localhost:3000/api/users/register", { name, email, password });
-    }
-
-    static async sendQuizResults(quizName, correctAnswers, email) {
-        return await axios.post("http://localhost:3000/api/quiz/saveQuiz", {quizName, correctAnswers, email})
+    static async deleteUser(userId) {
+        return await axios.delete(`${BASE_URL_API}/api/deleteUser`, {
+            data: { userId }
+        });
     }
 }
-
 
 export default ApiService;

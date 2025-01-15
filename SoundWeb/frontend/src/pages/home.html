@@ -35,9 +35,9 @@
             </div>
             <div
                 class="tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full max-md:tw-flex-col max-md:tw-place-content-center">
-                <a href="./src/pages/connexion.html" aria-label="signup"
+                <a href="./home.html#access_token=BQAKmWAGFcycA-nZaLRrOG4YyVfzfVj-j1bKQEyOkrZMP95Tf_12Tli8RRPGQmb9y52M_a6FUX4FXz8MNcI8WCoPowMMkGfWTwAadD4UKMsoHmrNi47Vm3MaIPvMxjw_8vonen_EkAkhiG4nCY-ZvhcYE4GnnHun_Yuo1SuhkCV5CEuMnekTzJWelGAyk3Ckrx-HHEoYxTkO7ydGIAHBIzSqh_wo5qce7tHx&token_type=Bearer&expires_in=3600" aria-label="signup"
                     class="tw-rounded-md tw-bg-primary tw-px-3 tw-py-2 tw-text-white tw-transition-transform tw-duration-[0.3s] hover:tw-translate-x-2">
-                    <span>Connexion</span>
+                    <span>Mon Compte</span>
                     <i class="bi bi-person-fill"></i>
                 </a>
             </div>
@@ -46,47 +46,66 @@
             onclick="toggleHeader()" aria-label="menu" id="collapse-btn"></button>
     </header>
 
-    <section x-data="searchTracks" class="tw-min-h-screen tw-pt-24 tw-px-4">
+    <section x-data="spotifyComponent" x-init="init()" class="tw-min-h-screen tw-pt-24 tw-px-4">
         <!-- Conteneur de recherche -->
         <div class="tw-w-full tw-max-w-2xl tw-mx-auto">
             <div class="tw-relative tw-group">
-                <!-- Icône de recherche -->
-                <div class="tw-absolute tw-inset-y-0 tw-left-3 tw-flex tw-items-center tw-pointer-events-none">
-                    <i class="bi bi-search tw-text-gray-400 tw-text-lg"></i>
-                </div>
-        
                 <!-- Champ de recherche -->
-                <input 
-                    type="text" 
-                    x-model="userQuery"
-                    id="search-input"
-                    placeholder="Rechercher des titres, artistes..."
-                    class="tw-w-full tw-pl-10 tw-pr-16 tw-py-3 tw-bg-white tw-border tw-border-gray-200 
-                           tw-rounded-full tw-shadow-sm tw-outline-none tw-transition-all
-                           focus:tw-border-primary focus:tw-ring-2 focus:tw-ring-primary/20
-                           hover:tw-border-gray-300"
-                >
-        
+                <input type="text" x-model="userQuery" placeholder="Rechercher des titres, artistes..."
+                    class="tw-w-full tw-pl-10 tw-pr-16 tw-py-3 tw-bg-white tw-border tw-border-gray-200 tw-rounded-full tw-shadow-sm tw-outline-none tw-transition-all focus:tw-border-primary focus:tw-ring-2 focus:tw-ring-primary/20 hover:tw-border-gray-300">
                 <!-- Bouton de recherche -->
-                <button 
-                    @click="searchTracks(userQuery)"
-                    id="search-button"
-                    class="tw-absolute tw-right-2 tw-top-1/2 tw-transform -tw-translate-y-1/2
-                           tw-px-4 tw-py-1.5 tw-bg-primary tw-text-white tw-rounded-full
-                           tw-text-sm tw-font-medium tw-transition-all
-                           hover:tw-bg-primary/90 active:tw-scale-95
-                           focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-primary focus:tw-ring-offset-2"
-                >
+                <button @click="searchTracks()"
+                    class="tw-absolute tw-right-2 tw-top-1/2 tw-transform -tw-translate-y-1/2 tw-px-4 tw-py-1.5 tw-bg-primary tw-text-white tw-rounded-full tw-text-sm tw-font-medium tw-transition-all hover:tw-bg-primary/90 active:tw-scale-95 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-primary focus:tw-ring-offset-2">
                     Rechercher
                 </button>
             </div>
-        
+
             <!-- Résultats de recherche -->
-            <div id="search-results" class="tw-mt-4 tw-space-y-4 tw-hidden">
+            <div x-show="displayedResults.length > 0" class="tw-mt-4">
+                <div class="tw-grid tw-gap-6 tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3">
+                    <template x-for="track in displayedResults" :key="track.id">
+                        <div class="tw-flex tw-flex-col tw-items-center tw-p-4 tw-border tw-rounded tw-shadow-sm">
+                            <!-- Image de l'album avec tailles responsives -->
+                            <img :src="track.album.images[0]?.url" alt="Album cover"
+                                class="tw-h-80 tw-w-80 sm:tw-h-48 sm:tw-w-48 md:tw-h-56 md:tw-w-56 lg:tw-h-64 lg:tw-w-64 tw-object-cover tw-rounded-md" />
+                            
+                            <!-- Nom de la piste -->
+                            <p class="tw-font-bold tw-mt-2 tw-text-center" x-text="track.name"></p>
+                            
+                            <!-- Nom des artistes -->
+                            <p class="tw-text-sm tw-text-gray-600 tw-mt-1 tw-text-center">
+                                <span x-text="track.artists.map(artist => artist.name).join(', ')"></span>
+                            </p>
+                            
+                            <!-- Bouton Lire/Pause -->
+                            <button @click="togglePlayPause(track.uri)"
+                                class="tw-mt-2 tw-bg-primary tw-text-white tw-px-4 tw-py-2 tw-rounded-md hover:tw-bg-primary/90">
+                                <span x-text="trackPlayingState[track.uri] ? 'Pause' : 'Lire'"></span>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Bouton "Voir plus" -->
+            <button x-show="displayedResults.length < allResults.length" @click="loadMore"
+                class="tw-mt-4 tw-px-4 tw-py-2 tw-bg-primary tw-text-white tw-rounded-md tw-font-medium hover:tw-bg-primary/90 active:tw-scale-95 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-primary focus:tw-ring-offset-2">
+                Voir plus
+            </button>
+
+            <!-- Message si aucun résultat -->
+            <div x-show="allResults.length === 0 && userQuery !== ''" class="tw-mt-4 tw-text-gray-500">
+                Aucun résultat trouvé.
             </div>
         </div>
     </section>
 
     <script src="../../index.js"></script>
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+        };
+    </script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </body>
+
 </html>

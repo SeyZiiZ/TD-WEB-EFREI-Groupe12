@@ -8,6 +8,7 @@
         "psr-4": {
             "App\\": "app/",
             "App\\Controller\\": "src/Controller",
+            "App\\Composables\\": "src/Composables",
             "App\\Model\\": "src/Model"
         }
     },
