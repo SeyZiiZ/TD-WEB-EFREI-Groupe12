@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWeb - Panneau Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../main.js" type="module" defer></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- En-tête -->    
+     <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Panneau d'Administration SoundWeb</h1>
+            <nav x-data="adminPanel">
+                <a href="./dashboard.html" class="px-4 hover:underline">Tableau de bord</a>
+                <button @click="logout" class="px-4 hover:underline">Déconnexion</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="container mx-auto mt-8">
+        <div class="grid grid-cols-12 gap-4">
+            <!-- Barre latérale -->
+            <aside class="col-span-3 bg-white p-4 shadow rounded">
+                <h2 class="text-lg font-bold mb-4">Navigation</h2>
+                <ul>
+                    <li class="mb-2">
+                        <a href="./usersAdmin.html" class="block p-2 rounded hover:bg-blue-100">Gérer les utilisateurs</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="./musiquesAdmin.html" class="block p-2 rounded hover:bg-blue-100">Gérer les musiques</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block p-2 rounded hover:bg-blue-100">Paramètres</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Section de contenu -->
+            <section class="col-span-9 bg-white p-4 shadow rounded">
+                <h2 class="text-lg font-bold mb-4">Tableau de bord</h2>
+                <div class="grid grid-cols-3 gap-4">
+                    <!-- Carte Gestion des Utilisateurs -->
+                    <div class="bg-blue-100 p-4 rounded shadow">
+                        <h3 class="text-md font-bold">Utilisateurs</h3>
+                        <p class="mt-2">Gérez et visualisez les utilisateurs enregistrés.</p>
+                        <a href="./usersAdmin.html" class="text-blue-600 hover:underline mt-2 inline-block">Voir les utilisateurs</a>
+                    </div>
+                    <!-- Carte Gestion des Playlists -->
+                    <div class="bg-green-100 p-4 rounded shadow">
+                        <h3 class="text-md font-bold">Musiques</h3>
+                        <p class="mt-2">Créez, modifiez et supprimez des musiques.</p>
+                        <a href="./musiquesAdmin.html" class="text-green-600 hover:underline mt-2 inline-block">Voir les musiques</a>
+                    </div>
+                    <!-- Carte Paramètres -->
+                    <div class="bg-yellow-100 p-4 rounded shadow">
+                        <h3 class="text-md font-bold">Paramètres</h3>
+                        <p class="mt-2">Mettez à jour vos préférences et configurations.</p>
+                        <a href="#" class="text-yellow-600 hover:underline mt-2 inline-block">Modifier les paramètres</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

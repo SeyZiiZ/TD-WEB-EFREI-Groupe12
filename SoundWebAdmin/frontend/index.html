@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWeb - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./src/main.js" type="module" defer></script>
+</head>
+<body>
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Panneau d'Administration SoundWeb</h1>
+        </div>
+    </header>
+
+    <section class="flex min-h-screen items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <div class="overflow-hidden rounded-2xl bg-white shadow-xl">
+                <!-- En-tête -->
+                <div class="px-8 pt-8">
+                    <h2 class="text-center text-2xl font-bold text-gray-900">Connexion</h2>
+                </div>
+                <!-- Formulaire -->
+                <div x-data="loginData">
+                    <div class="p-8">
+                        <form class="space-y-6" @submit.prevent="handleLogin">
+                            <!-- Email -->
+                            <div class="space-y-2">
+                                <label for="email" class="text-sm font-medium text-gray-700">Adresse e-mail</label>
+                                <input type="email" x-model="loginEmail" id="email" name="email"
+                                    placeholder="votre@email.com"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                    required>
+                            </div>
+    
+                            <!-- Mot de passe -->
+                            <div class="space-y-2">
+                                <label for="password" class="text-sm font-medium text-gray-700">Mot de passe</label>
+                                <input type="password" x-model="loginPassword" id="password" name="password"
+                                    placeholder="Votre mot de passe"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                                    required>
+                            </div>
+    
+                            <!-- Bouton de connexion -->
+                            <button type="submit"
+                                class="w-full transform rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:scale-[0.98]">
+                                Se connecter
+                            </button>
+                        </form>
+                    </div>
+                    <div x-show="errorMessage" x-text="errorMessage" class="text-red-600 font-Roboto text-center"></div>
+                    <div x-show="successMessage" x-text="successMessage" class="text-green-500 font-Roboto text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+</body>
+</html>
