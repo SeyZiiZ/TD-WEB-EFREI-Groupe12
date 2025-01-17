@@ -9,7 +9,22 @@ class ApiService {
         return await axios.post(`${BASE_URL_API}/api/getAllUsers`);
     }
     static async deleteUser(userId) {
-        return await axios.delete(`${BASE_URL_API}/api/deleteUser/${userId}`);
+        return await axios.post(`${BASE_URL_API}/api/deleteUser`, { userId });
+    }
+    static async getAllMusics() {
+        return await axios.post(`${BASE_URL_API}/api/getAllMusics`);
+    }
+    static async addMusic(title, genre, auteur, fileName, fileImageName) {
+        return await axios.post(`${BASE_URL_API}/api/addMusic`, {
+            title,
+            genre,
+            auteur,
+            fileName,
+            fileImageName
+        });
+    }
+    static async deleteMusic(id, name) {
+        return await axios.post(`${BASE_URL_API}/api/deleteMusic`, {id, name});
     }
 }
 

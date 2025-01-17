@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoundWeb - Panneau Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../main.js" type="module" defer></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
+
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div x-data="authManager" x-init="init"></div>
+
     <!-- En-tête -->
     <header class="bg-blue-600 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
@@ -18,5 +25,131 @@
             </nav>
         </div>
     </header>
+
+    <!-- Bouton et formulaire -->
+    <div x-data="formManager" class="container mx-auto mt-8 flex flex-col items-center">
+        <!-- Bouton centré -->
+        <button @click="toggleForm"
+            class="mb-4 rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+            <span x-text="showForm ? 'Masquer le formulaire' : 'Ajouter Une Musique'"></span>
+        </button>
+
+        <!-- Formulaire et contenu -->
+        <div x-show="showForm" x-data="AddMusicData" 
+            class="p-8 bg-white rounded-lg shadow w-full max-w-md">
+            <form class="space-y-6" @submit.prevent="handleAddMusic">
+                <!-- Titre -->
+                <div class="space-y-2">
+                    <label for="musicTitle" class="text-sm font-medium text-gray-700">Titre de la musique</label>
+                    <input type="text" x-model="musicTitle" id="musicTitle" name="musicTitle"
+                        placeholder="Nom de la musique"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        required>
+                </div>
+
+                <!-- Genre -->
+                <div class="space-y-2">
+                    <label for="genre" class="text-sm font-medium text-gray-700">Genre de Musique</label>
+                    <select x-model="musicGenre" id="musicGenre" name="musicGenre"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        required>
+                        <option value="" disabled selected>Sélectionnez un genre</option>
+                        <template x-for="genre in genres" :key="genre.id">
+                            <option :value="genre.id" x-text="genre.name"></option>
+                        </template>
+                    </select>
+                </div>
+
+                <!-- Auteur -->
+                <div class="space-y-2">
+                    <label for="authors" class="text-sm font-medium text-gray-700">Auteur Favori</label>
+                    <select x-model="selectedAuthor" id="authors" name="authors"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        required>
+                        <option value="" disabled selected>Sélectionnez un auteur</option>
+                        <template x-for="author in authors" :key="author.id">
+                            <option :value="author.id" x-text="author.name"></option>
+                        </template>
+                    </select>
+                </div>
+
+                <!-- Fichier -->
+                <div class="space-y-2">
+                    <label for="musicFolder" class="text-sm font-medium text-gray-700">Nom du fichier</label>
+                    <input type="text" x-model="musicFolder" id="musicFolder" name="musicFolder"
+                        placeholder="Nom de la musique mp3/mp4"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        required>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="musicImage" class="text-sm font-medium text-gray-700">Image du fichier</label>
+                    <input type="text" x-model="musicImage" id="musicImage" name="musicImage"
+                        placeholder="Nom de la musique mp3/mp4"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        required>
+                </div>
+
+                <!-- Bouton Ajouter -->
+                <button type="submit"
+                    class="w-full transform rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:scale-[0.98]">
+                    Ajouter
+                </button>
+            </form>
+
+            <div x-show="errorMessage" x-text="errorMessage" class="text-red-600 font-Roboto text-center"></div>
+            <div x-show="successMessage" x-text="successMessage" class="text-green-500 font-Roboto text-center"></div>
+        </div>
+
+        <div x-show="!showForm" class="w-full bg-white rounded-lg shadow p-6" x-data="Musics" x-init="fetchMusics">
+            
+            <!-- Loading state -->
+            <div x-show="isLoading" class="text-center py-4">
+                Chargement des musiques...
+            </div>
+        
+            <!-- Error state -->
+            <div x-show="error" class="text-red-600 text-center py-4" x-text="error"></div>
+        
+            <div x-cloak x-data="Musics" x-init="fetchMusics">
+                <h2 class="text-xl font-bold mb-4">Liste des Musiques</h2>
+                
+                <!-- Chargement -->
+                <div x-show="isLoading" class="text-center py-4">
+                    Chargement des musiques...
+                </div>
+            
+                <!-- Erreur -->
+                <div x-show="error" class="text-red-600 text-center py-4" x-text="error"></div>
+            
+                <!-- Liste des musiques -->
+                <div x-show="!isLoading && !error" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <template x-for="music in musics" :key="music.id || index">
+                        <div x-data="deleteMusic" class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="font-semibold" x-text="music.title || 'Titre non disponible'"></h3>
+                            <p class="text-sm text-gray-600" x-text="'Genre: ' + (music.genre_id || 'Non défini')"></p>
+                            <p class="text-sm text-gray-600" x-text="'Auteur: ' + (music.author_id || 'Non défini')"></p>
+                            <p class="text-sm text-gray-600" x-text="'Ajouté le: ' + (music.created_at ? new Date(music.created_at).toLocaleDateString() : 'Non disponible')"></p>
+                            <div class="mt-3 flex justify-end space-x-2">
+                                <button 
+                                    class="text-red-600 hover:text-red-800"
+                                    @click="deleteMusic(music.id, music.title)"
+                                    >
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            
+                <!-- Aucune musique -->
+                <div x-show="!isLoading && !error && musics.length === 0" class="text-center py-4">
+                    Aucune musique disponible
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </body>
+
 </html>

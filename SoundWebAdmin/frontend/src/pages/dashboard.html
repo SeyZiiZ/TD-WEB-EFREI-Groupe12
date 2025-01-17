@@ -8,11 +8,12 @@
     <script src="../main.js" type="module" defer></script>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <!-- En-tête -->    
-     <header class="bg-blue-600 text-white p-4">
+    <div x-data="authManager" x-init="init">
+            <!-- En-tête -->    
+    <header class="bg-blue-600 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">Panneau d'Administration SoundWeb</h1>
-            <nav x-data="adminPanel">
+            <nav>
                 <a href="./dashboard.html" class="px-4 hover:underline">Tableau de bord</a>
                 <button @click="logout" class="px-4 hover:underline">Déconnexion</button>
             </nav>
@@ -63,6 +64,7 @@
                 </div>
             </section>
         </div>
+    </div>
     </div>
 </body>
 </html>

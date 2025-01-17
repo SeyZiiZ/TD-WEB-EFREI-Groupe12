@@ -1,6 +1,7 @@
 import Alpine from "../node_modules/alpinejs/dist/module.esm.js";
 import ValidationService from './scripts/ValidationServices.js';
 import ApiService from "./scripts/ApiServices.js";
+import { genres, authors } from "./pages/composables/music.js";
 
 window.Alpine = Alpine;
 
@@ -103,5 +104,110 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 });
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('authManager', () => ({
+        authToken: null,
+
+        init() {
+            this.authToken = localStorage.getItem('authToken');
+            if (!this.authToken) {
+                window.location.href = '../../index.html';
+            }
+        },
+
+        checkToken() {
+            return this.authToken !== null;
+        },
+
+        logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = '../../index.html';
+        },
+    }));
+});
+
+Alpine.data('formManager', () => ({
+    showForm: false,
+    toggleForm() {
+        this.showForm = !this.showForm;
+    }
+}));
+
+Alpine.data('AddMusicData', () => ({
+    musicTitle: '',
+    musicGenre: '',
+    musicFolder: '',
+    musicImage: '',
+    selectedAuthor: '',
+    genres: genres,
+    authors: authors,
+    errorMessage: '',
+    successMessage: '',
+
+    async handleAddMusic() {
+        if (!this.musicTitle || !this.musicGenre || !this.musicFolder || !this.selectedAuthor || !this.musicImage) {
+            alert('Veuillez remplir tous les champs !');
+            return;
+        }
+
+        try {
+            const response = await ApiService.addMusic(this.musicTitle, this.musicGenre, this.selectedAuthor, this.musicFolder, this.musicImage);
+            
+            const { Status, Message } = response.data;
+
+            if (Status) {
+                this.successMessage = Message;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    clearMessages() {
+        this.errorMessage = "";
+        this.successMessage = "";
+    }
+}));
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('Musics', () => ({
+        musics: [],
+        isLoading: false,
+        error: null,
+
+        async fetchMusics() {
+            this.isLoading = true;
+            this.error = null;
+
+            try {
+                const response = await ApiService.getAllMusics();
+                this.musics = response.data.Musics;
+            } catch (e) {
+                this.error = "Erreur lors de la récupération des musiques.";
+            } finally {
+                this.isLoading = false;
+            }
+        }
+    }));
+});
+
+Alpine.data('deleteMusic', () => ({
+    async deleteMusic(id, name) {
+        const confirmDelete = confirm(`Voulez-vous vraiment supprimer la musique : "${name}" ?`);
+        if (!confirmDelete) return;
+
+        try {
+            const response = await ApiService.deleteMusic(id, name);
+            const { Status, Message } = response.data;
+            if (Status) {
+                alert(`La musique "${name}" a été supprimée avec succès.`);
+                window.location.reload();
+            }
+        } catch (e) {
+            alert("Erreur lors de la tentative supression");
+        }
+    }
+}));
 
 Alpine.start();
