@@ -15,5 +15,8 @@ export const authors = [
     { id: 8, name: 'David Bowie' },
     { id: 9, name: 'Aretha Franklin' },
     { id: 10, name: 'John Lennon' },
-    { id: 11, name: 'Major Lazer'}
+    { id: 11, name: 'Major Lazer'},
+    { id: 12, name: 'Imagine Dragons'},
+    { id: 13, name: 'Maitre Gims'},
+    { id: 14, name: 'Guy2Bezbar'}
 ]
