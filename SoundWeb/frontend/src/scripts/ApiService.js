@@ -6,11 +6,9 @@ class ApiService {
     static async loginUser(email, password) {
         return await axios.post(`${BASE_URL_API}/api/login`, { email, password });
     }
-
-    static async deleteUser(userId) {
-        return await axios.delete(`${BASE_URL_API}/api/deleteUser`, {
-            data: { userId }
-        });
+    
+    static async getAllMusics() {
+        return await axios.post(`${BASE_URL_API}/api/getAllMusics`);
     }
 }
 

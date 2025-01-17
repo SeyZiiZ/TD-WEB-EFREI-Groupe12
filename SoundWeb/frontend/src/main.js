@@ -68,6 +68,22 @@ Alpine.data("loginData", () => ({
     }
 }));
 
+Alpine.data("userFunc", () => ({
+    homeAccess() {
+        const spotifyToken = localStorage.getItem("spotifyToken");
+        if (spotifyToken) {
+            return `./home.html#access_token=${spotifyToken}&token_type=Bearer&expires_in=3600`;
+        } else {
+            alert("Token introuvable. Veuillez vous connecter.");
+            return "./login.html";
+        }
+    },
+    logout() {
+        localStorage.removeItem("authToken");
+        window.location.reload();
+    }
+}));
+
 Alpine.data("RegisterData", () => ({
     registerEmail: "",
     registerPassword: "",
@@ -137,12 +153,14 @@ document.addEventListener('alpine:init', () => {
         currentPage: 0,
         trackPlayingState: {},
         currentPlayingUri: null,
+        showResults: true,
 
         async init() {
             console.log('Initialisation du composant...');
             const hash = window.location.hash;
             const params = new URLSearchParams(hash.replace("#", ""));
             this.accessToken = params.get("access_token");
+            localStorage.setItem("spotifyToken", this.accessToken);
 
             if (!this.accessToken) {
                 alert("Token d'accès manquant. Connectez-vous via Spotify.");
@@ -276,6 +294,10 @@ document.addEventListener('alpine:init', () => {
             }
         },
 
+        toggleResultsVisibility() {
+            this.showResults = !this.showResults;
+        },
+
         loadMore() {
             const start = this.currentPage * this.itemsPerPage;
             const end = start + this.itemsPerPage;
@@ -294,5 +316,60 @@ document.addEventListener('alpine:init', () => {
     }));
 });
 
+document.addEventListener('alpine:init', () => {
+    Alpine.data('Musics', () => ({
+        musics: [],
+        isLoading: false,
+        error: null,
+
+        async fetchMusics() {
+            this.isLoading = true;
+            this.error = null;
+        
+            try {
+                const response = await ApiService.getAllMusics();
+        
+                const baseImagePath = '../assets/images/musics-logos/';
+                this.musics = response.data.Musics.map(music => ({
+                    ...music,
+                    imagePath: baseImagePath + (music.image_path)
+                }));
+            } catch (e) {
+                this.error = "Erreur lors de la récupération des musiques.";
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        playMusic(filePath) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = `../assets/musiques/${filePath}`;
+            audioPlayer.classList.remove('tw-hidden');
+            audioPlayer.play();
+        }
+    }));
+});
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('authManager', () => ({
+        authToken: null,
+
+        init() {
+            this.authToken = localStorage.getItem('authToken');
+            if (!this.authToken) {
+                window.location.href = '../../index.html';
+            }
+        },
+
+        checkToken() {
+            return this.authToken !== null;
+        },
+
+        logout() {
+            localStorage.removeItem('authToken');
+            window.location.href = '../../index.html';
+        },
+    }));
+});
 
 Alpine.start();

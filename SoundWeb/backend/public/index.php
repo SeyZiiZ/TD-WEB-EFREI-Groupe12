@@ -15,6 +15,7 @@ use App\Router\Router;
 use App\Controller\LoginController;
 use App\Controller\RegisterController;
 use App\Controller\UserController;
+use App\Controller\MusicController;
 
 $router = new Router();
 
@@ -61,15 +62,39 @@ $router->add('/api/getAllUsers', function () {
     echo json_encode($response);
 });
 
-$router->add('/api/deleteUser/:id', function ($id) {
-    if (!$id) {
-        http_response_code(400);
-        echo json_encode(["Message" => "L'ID de l'utilisateur est requis."]);
-        return;
-    }
+$router->add('/api/deleteUser', function () {
+    $data = json_decode(file_get_contents('php://input'), true);
 
     $controller = new UserController();
-    $response = $controller->deleteUser(["userId" => $id]);
+    $response = $controller->deleteUser($data);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->add('/api/getAllMusics', function () {
+    $controller = new MusicController();
+    $response = $controller->getAllMusics();
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->add('/api/addMusic', function () {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $controller = new MusicController();
+    $response = $controller->addMusic($data);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->add('/api/deleteMusic', function () {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $controller = new MusicController();
+    $response = $controller->deleteMusic($data);
 
     header('Content-Type: application/json');
     echo json_encode($response);

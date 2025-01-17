@@ -28,13 +28,15 @@ class UserController {
 
     public function deleteUser($data) {
         try {
-            if (!isset($data['userId'])) {
+            $userId = $data['userId'];
+
+            if (!isset($userId)) {
                 http_response_code(400);
                 return ["Message" => "L'ID de l'utilisateur est requis."];
             }
     
             $userModel = new UserModel();
-            $userModel->deleteUser($data['userId']); // Utilisation correcte de l'ID
+            $userModel->deleteUser($userId);
     
             return [
                 "Message" => "Utilisateur supprimé avec succès.",
