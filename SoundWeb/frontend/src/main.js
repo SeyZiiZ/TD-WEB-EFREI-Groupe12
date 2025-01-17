@@ -3,6 +3,7 @@ import ValidationService from './scripts/ValiditationService.js';
 import ApiService from "./scripts/ApiService.js";
 import SpotifyService from './scripts/SpotifySerice.js';
 import axios from '../node_modules/axios/dist/esm/axios.js';
+import { genres, authors } from "./composables/music.js";
 
 window.Alpine = Alpine;
 
@@ -346,7 +347,15 @@ document.addEventListener('alpine:init', () => {
             audioPlayer.src = `../assets/musiques/${filePath}`;
             audioPlayer.classList.remove('tw-hidden');
             audioPlayer.play();
-        }
+        },
+        getGenreName(genreId) {
+            const genre = genres.find(g => g.id === genreId);
+            return genre ? genre.name : 'Non défini';
+        },
+        getAuthorName(authorId) {
+            const author = authors.find(a => a.id === authorId);
+            return author ? author.name : 'Non défini';
+        },
     }));
 });
 

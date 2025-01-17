@@ -125,7 +125,7 @@
     
         <div x-cloak x-data="Musics" x-init="fetchMusics">
             <h2 class="tw-text-xl tw-font-bold tw-mb-4">Liste des Musiques</h2>
-            <audio id="audioPlayer" controls class="tw-hidden"></audio>
+            <audio id="audioPlayer" controls class="tw-hidden tw-sticky tw-top-3 z-999"></audio>
     
             <!-- Chargement -->
             <div x-show="isLoading" class="tw-text-center tw-py-4">
@@ -150,9 +150,9 @@
                             <!-- Titre -->
                             <h3 class="tw-text-xl tw-font-semibold tw-truncate" x-text="music.title || 'Titre non disponible'"></h3>
                             <!-- Genre -->
-                            <p class="tw-text-sm tw-text-gray-500 tw-mt-2" x-text="'Genre : ' + (music.genre_id || 'Non défini')"></p>
+                            <p class="tw-text-sm tw-text-gray-500 tw-mt-2" x-text="'Genre : ' + getGenreName(music.genre_id)"></p>
                             <!-- Auteur -->
-                            <p class="tw-text-sm tw-text-gray-500" x-text="'Auteur : ' + (music.author_id || 'Non défini')"></p>
+                            <p class="tw-text-sm tw-text-gray-500" x-text="'Auteur : ' + getAuthorName(music.author_id)"></p>
                             <!-- Bouton Jouer -->
                             <button 
                                 @click="playMusic(music.file_path)" 
