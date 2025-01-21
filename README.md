@@ -25,7 +25,7 @@ Le projet est organisé en trois dossiers principaux :
   cd backend
   composer install
 - **Lancement** : Cette commande démarre le serveur de développement
-  ```bash
+  ```php
   php -S localhost:8000 public/index.php
 
 ### 2️⃣ Frontend (Alpine)
@@ -42,3 +42,8 @@ Le projet est organisé en trois dossiers principaux :
 - **Localisation** : Dossier `SoundWebPlain.sql`
 - **Initialisation** : Importez le fichier SoundWebPlain.sql dans votre système de gestion de base de données (PostgreSQL, sinon adaptez les tables pour un autre SGBD.).
 - **Connexion** : Assurez-vous que les informations de connexion à la base de données sont correctement configurées dans le fichier \backend/.env du backend.
+```bash
+  DB_HOST="..."
+  DB_NAME="..."
+  DB_USER="..."
+  DB_PASSWORD="..."
